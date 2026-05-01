@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
 import matplotlib.pyplot as plt
 
 # ==========================================
@@ -191,46 +190,37 @@ if st.button("🔍 Analisar Minha Rotina"):
     # DATAFRAME
     # ==========================================
     dados = pd.DataFrame({
-        "Categoria": [
-            "Sono",
-            "Trabalho/Estudo",
-            "Lazer",
-            "Redes Sociais"
-        ],
-        "Horas": [
-            sono,
-            trabalho,
-            lazer,
-            tela
-        ]
+        "Categoria": ["Sono", "Trabalho/Estudo", "Lazer", "Redes Sociais"],
+        "Horas": [sono, trabalho, lazer, tela]
     })
 
     # ==========================================
-    # GRÁFICO PLOTLY
-    # ==========================================
-    st.header("📈 Visualização Interativa da Rotina")
-
-    fig_pie = px.pie(
-        dados,
-        names="Categoria",
-        values="Horas",
-        title="Distribuição da Rotina Diária",
-        hole=0.4
-    )
-
-    st.plotly_chart(fig_pie, use_container_width=True)
-
-    # ==========================================
-    # GRÁFICO MATPLOTLIB
+    # GRÁFICO DE BARRAS (MATPLOTLIB)
     # ==========================================
     st.header("📊 Comparativo em Barras")
 
-    fig, ax = plt.subplots(figsize=(8, 4))
+    fig_bar, ax = plt.subplots()
     ax.bar(dados["Categoria"], dados["Horas"])
     ax.set_ylabel("Horas")
     ax.set_title("Horas por Categoria")
 
-    st.pyplot(fig)
+    st.pyplot(fig_bar)
+
+    # ==========================================
+    # GRÁFICO DE PIZZA (MATPLOTLIB)
+    # ==========================================
+    st.header("📈 Distribuição da Rotina")
+
+    fig_pie, ax2 = plt.subplots()
+    ax2.pie(
+        dados["Horas"],
+        labels=dados["Categoria"],
+        autopct='%1.1f%%',
+        startangle=90
+    )
+    ax2.axis('equal')
+
+    st.pyplot(fig_pie)
 
     st.markdown("---")
 
@@ -240,12 +230,12 @@ if st.button("🔍 Analisar Minha Rotina"):
     st.header("🤖 Previsão de Performance Futura")
 
     st.write(f"""
-    Com base nos seus hábitos atuais, um modelo preditivo estimaria aproximadamente:
+    Com base nos seus hábitos atuais, estima-se aproximadamente:
 
     **{chance}% de probabilidade** de você manter consistência e atingir seu objetivo de **{objetivo.lower()}**.
     """)
 
-    st.caption("⚠️ Atualmente esta previsão é simulada com base em regras heurísticas e pode ser substituída por modelo de Machine Learning real futuramente.")
+    st.caption("⚠️ Esta previsão é baseada em regras heurísticas e pode ser substituída por um modelo de Machine Learning real futuramente.")
 
     st.markdown("---")
 
