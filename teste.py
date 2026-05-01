@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
 
 # ==========================================
 # CONFIGURAÇÃO DA PÁGINA
@@ -22,12 +21,6 @@ st.markdown("""
 h1, h2, h3 {
     color: #2c3e50;
 }
-.stMetric {
-    background-color: #ffffff;
-    padding: 10px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
 </style>
 """, unsafe_allow_html=True)
 
@@ -42,7 +35,7 @@ st.write("""
 Preencha sua rotina diária e receba:
 
 - 📊 Diagnóstico completo
-- 📈 Visualizações gráficas
+- 📈 Visualização da rotina
 - 🤖 Previsão de performance futura
 - 🧭 Plano de melhoria personalizado
 """)
@@ -94,18 +87,14 @@ if st.button("🔍 Analisar Minha Rotina"):
 
     st.header("📊 Diagnóstico da Rotina")
 
-    # ------------------------
-    # ANÁLISE SONO
-    # ------------------------
+    # SONO
     if sono >= 7:
         st.success("✔️ Você está dormindo adequadamente.")
         score += 2
     else:
         st.warning("⚠️ Sono insuficiente pode prejudicar foco e saúde.")
 
-    # ------------------------
     # REDES SOCIAIS
-    # ------------------------
     if tela <= 2:
         st.success("✔️ Uso saudável de redes sociais.")
         score += 2
@@ -115,9 +104,7 @@ if st.button("🔍 Analisar Minha Rotina"):
     else:
         st.error("🚨 Tempo excessivo em redes sociais.")
 
-    # ------------------------
     # VIDA ESPIRITUAL
-    # ------------------------
     if tempo_com_Deus >= 20:
         st.success("🙏 Excelente prioridade espiritual.")
         score += 2
@@ -127,30 +114,22 @@ if st.button("🔍 Analisar Minha Rotina"):
     else:
         st.warning("⚠️ Nenhum tempo espiritual registrado.")
 
-    # ------------------------
     # EXERCÍCIO
-    # ------------------------
     if exercicio:
         st.success("🏋️ Exercício físico contribui para performance e saúde.")
         score += 1
 
-    # ------------------------
     # LEITURA
-    # ------------------------
     if leitura:
         st.success("📚 Leitura diária fortalece aprendizado contínuo.")
         score += 1
 
-    # ------------------------
     # PLANEJAMENTO
-    # ------------------------
     if planejamento:
         st.success("📝 Planejamento diário aumenta consistência.")
         score += 1
 
-    # ------------------------
     # TOTAL DE HORAS
-    # ------------------------
     total_horas = sono + trabalho + lazer + tela
 
     if total_horas > 24:
@@ -187,45 +166,25 @@ if st.button("🔍 Analisar Minha Rotina"):
     st.markdown("---")
 
     # ==========================================
-    # DATAFRAME
+    # VISUALIZAÇÃO DA ROTINA
     # ==========================================
+    st.header("📈 Visualização da Rotina")
+
     dados = pd.DataFrame({
-        "Categoria": ["Sono", "Trabalho/Estudo", "Lazer", "Redes Sociais"],
-        "Horas": [sono, trabalho, lazer, tela]
+        "Horas": {
+            "Sono": sono,
+            "Trabalho/Estudo": trabalho,
+            "Lazer": lazer,
+            "Redes Sociais": tela
+        }
     })
 
-    # ==========================================
-    # GRÁFICO DE BARRAS (MATPLOTLIB)
-    # ==========================================
-    st.header("📊 Comparativo em Barras")
-
-    fig_bar, ax = plt.subplots()
-    ax.bar(dados["Categoria"], dados["Horas"])
-    ax.set_ylabel("Horas")
-    ax.set_title("Horas por Categoria")
-
-    st.pyplot(fig_bar)
-
-    # ==========================================
-    # GRÁFICO DE PIZZA (MATPLOTLIB)
-    # ==========================================
-    st.header("📈 Distribuição da Rotina")
-
-    fig_pie, ax2 = plt.subplots()
-    ax2.pie(
-        dados["Horas"],
-        labels=dados["Categoria"],
-        autopct='%1.1f%%',
-        startangle=90
-    )
-    ax2.axis('equal')
-
-    st.pyplot(fig_pie)
+    st.bar_chart(dados)
 
     st.markdown("---")
 
     # ==========================================
-    # SIMULAÇÃO DE MACHINE LEARNING
+    # PREVISÃO
     # ==========================================
     st.header("🤖 Previsão de Performance Futura")
 
@@ -235,12 +194,12 @@ if st.button("🔍 Analisar Minha Rotina"):
     **{chance}% de probabilidade** de você manter consistência e atingir seu objetivo de **{objetivo.lower()}**.
     """)
 
-    st.caption("⚠️ Esta previsão é baseada em regras heurísticas e pode ser substituída por um modelo de Machine Learning real futuramente.")
+    st.caption("⚠️ Esta previsão é heurística e pode futuramente ser substituída por Machine Learning real.")
 
     st.markdown("---")
 
     # ==========================================
-    # PLANO PERSONALIZADO
+    # PLANO DE MELHORIA
     # ==========================================
     st.header("🧭 Plano de Melhoria Personalizado")
 
