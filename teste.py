@@ -60,7 +60,7 @@ with col2:
 # ==========================================
 # INPUTS EXTRAS
 # ==========================================
-st.header("🎯 Hábitos e Objetivos")
+st.header("Hábitos e Objetivos")
 
 objetivo = st.selectbox(
     "Qual seu principal objetivo atual?",
@@ -73,8 +73,8 @@ objetivo = st.selectbox(
     ]
 )
 
-leitura = st.checkbox("📚 Faço leitura diária")
-planejamento = st.checkbox("📝 Planejo meu dia com antecedência")
+leitura = st.checkbox("Faço leitura diária")
+planejamento = st.checkbox("Planejo meu dia com antecedência")
 
 st.markdown("---")
 
@@ -82,7 +82,7 @@ st.markdown("---")
 # ==========================================
 # BOTÃO DE ANÁLISE
 # ==========================================
-if st.button("🔍 Analisar Minha Rotina"):
+if st.button("Analisar Minha Rotina"):
 
     score = 0
 
