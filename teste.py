@@ -1,235 +1,316 @@
-import streamlit as st
-import pandas as pd
+Importa a biblioteca principal do Streamlit para criar a interface web 
 
-# ==========================================
-# CONFIGURAÇÃO DA PÁGINA
-# ==========================================
-st.set_page_config(
-    page_title="Simulador de Rotina Ideal",
-    page_icon="🌿",
-    layout="wide"
-)
+import streamlit as st 
 
-# ==========================================
-# ESTILO PERSONALIZADO
-# ==========================================
-st.markdown("""
-<style>
-.main {
-    background-color: #f8f9fa;
-}
-h1, h2, h3 {
-    color: #2c3e50;
-}
-</style>
-""", unsafe_allow_html=True)
+Importa o Pandas para manipular e estruturar dados em tabelas/dataframes 
 
-# ==========================================
-# CABEÇALHO
-# ==========================================
-st.title("🌿 Simulador de Rotina Ideal")
-st.subheader("Sua rotina está te levando para onde você quer?")
-st.markdown("---")
+import pandas as pd 
 
-st.write("""
-Preencha sua rotina diária e receba:
+========================================== 
 
-- 📊 Diagnóstico completo
-- 📈 Visualização da rotina
-- 🤖 Previsão de performance futura
-- 🧭 Plano de melhoria personalizado
-""")
+CONFIGURAÇÃO DA PÁGINA 
 
-# ==========================================
-# INPUTS PRINCIPAIS
-# ==========================================
-st.header("⏰ Monte sua rotina diária")
+Define título, ícone e layout da aplicação web 
 
-col1, col2 = st.columns(2)
+========================================== 
 
-with col1:
-    sono = st.slider("🛌 Horas de sono", 0, 12, 7)
-    trabalho = st.slider("📚 Trabalho / Estudo", 0, 12, 6)
-    lazer = st.slider("🎮 Lazer", 0, 10, 2)
+st.set_page_config( page_title="Simulador de Rotina Ideal", page_icon="🌿", layout="wide" ) 
 
-with col2:
-    tempo_com_Deus = st.slider("🙏 Tempo com Deus (minutos)", 0, 120, 15)
-    tela = st.slider("📱 Redes Sociais (horas)", 0, 10, 3)
-    exercicio = st.checkbox("🏋️ Pratico exercícios físicos")
+========================================== 
 
-# ==========================================
-# INPUTS EXTRAS
-# ==========================================
-st.header("🎯 Hábitos e Objetivos")
+ESTILO PERSONALIZADO (CSS) 
 
-objetivo = st.selectbox(
-    "Qual seu principal objetivo atual?",
-    [
-        "Alta produtividade",
-        "Equilíbrio emocional",
-        "Crescimento espiritual",
-        "Performance acadêmica",
-        "Disciplina pessoal"
-    ]
-)
+Permite customizar visualmente o app usando CSS 
 
-leitura = st.checkbox("📚 Faço leitura diária")
-planejamento = st.checkbox("📝 Planejo meu dia com antecedência")
+unsafe_allow_html=True permite renderizar HTML/CSS 
 
-st.markdown("---")
+========================================== 
 
-# ==========================================
-# BOTÃO DE ANÁLISE
-# ==========================================
-if st.button("🔍 Analisar Minha Rotina"):
+st.markdown(""" 
 
-    score = 0
+""", unsafe_allow_html=True) 
 
-    st.header("📊 Diagnóstico da Rotina")
+========================================== 
 
-    # SONO
-    if sono >= 7:
-        st.success("✔️ Você está dormindo adequadamente.")
-        score += 2
-    else:
-        st.warning("⚠️ Sono insuficiente pode prejudicar foco e saúde.")
+CABEÇALHO PRINCIPAL 
 
-    # REDES SOCIAIS
-    if tela <= 2:
-        st.success("✔️ Uso saudável de redes sociais.")
-        score += 2
-    elif tela <= 4:
-        st.info("ℹ️ Uso moderado de redes sociais.")
-        score += 1
-    else:
-        st.error("🚨 Tempo excessivo em redes sociais.")
+Título e subtítulo da aplicação 
 
-    # VIDA ESPIRITUAL
-    if tempo_com_Deus >= 20:
-        st.success("🙏 Excelente prioridade espiritual.")
-        score += 2
-    elif tempo_com_Deus > 0:
-        st.info("✨ Bom começo — tente aprofundar esse hábito.")
-        score += 1
-    else:
-        st.warning("⚠️ Nenhum tempo espiritual registrado.")
+========================================== 
 
-    # EXERCÍCIO
-    if exercicio:
-        st.success("🏋️ Exercício físico contribui para performance e saúde.")
-        score += 1
+st.title("🌿 Simulador de Rotina Ideal") st.subheader("Sua rotina está te levando onde você quer chegar?") st.markdown("---") 
 
-    # LEITURA
-    if leitura:
-        st.success("📚 Leitura diária fortalece aprendizado contínuo.")
-        score += 1
+Texto explicativo introdutório para o usuário 
 
-    # PLANEJAMENTO
-    if planejamento:
-        st.success("📝 Planejamento diário aumenta consistência.")
-        score += 1
+st.write(""" Preencha sua rotina diária para análise: 
 
-    # TOTAL DE HORAS
-    total_horas = sono + trabalho + lazer + tela
+“””) 
 
-    if total_horas > 24:
-        st.error("🚨 Sua rotina ultrapassa 24h. Ajuste necessário.")
-    else:
-        score += 1
+========================================== 
 
-    st.markdown("---")
+INPUTS PRINCIPAIS 
 
-    # ==========================================
-    # RESULTADO FINAL
-    # ==========================================
-    st.header("🎯 Resultado Final")
+Área onde o usuário informa sua rotina diária 
 
-    if score >= 9:
-        perfil = "Alta Performance"
-        chance = 95
-        st.success("🔥 Sua rotina está extremamente alinhada com alta performance.")
-    elif score >= 6:
-        perfil = "Em Evolução"
-        chance = 75
-        st.info("⚖️ Sua rotina é boa, mas ainda possui oportunidades de melhoria.")
-    else:
-        perfil = "Desorganizada"
-        chance = 40
-        st.error("🚨 Sua rotina atual está desalinhada dos seus objetivos.")
+========================================== 
 
-    col1, col2, col3 = st.columns(3)
+st.header("⏰ Conte para nós como é sua rotina diária:") 
 
-    col1.metric("Score Final", score)
-    col2.metric("Perfil", perfil)
-    col3.metric("Chance de Sucesso", f"{chance}%")
+Divide a tela em duas colunas para melhor organização visual 
 
-    st.markdown("---")
+col1, col2 = st.columns(2) 
 
-    # ==========================================
-    # VISUALIZAÇÃO DA ROTINA
-    # ==========================================
-    st.header("📈 Visualização da Rotina")
+Primeira coluna com sliders 
 
-    dados = pd.DataFrame({
-        "Horas": {
-            "Sono": sono,
-            "Trabalho/Estudo": trabalho,
-            "Lazer": lazer,
-            "Redes Sociais": tela
-        }
-    })
+with col1: 
 
-    st.bar_chart(dados)
+# Slider para horas de sono (0 a 12 horas) 
+sono = st.slider("🛌 Horas de sono", 0, 12, 7) 
+ 
+# Slider para horas de trabalho/estudo 
+trabalho = st.slider("📚 Trabalho / Estudo", 0, 12, 6) 
+ 
+# Slider para horas de lazer 
+lazer = st.slider("🎮 Lazer", 0, 10, 2) 
+ 
 
-    st.markdown("---")
+Segunda coluna com mais inputs 
 
-    # ==========================================
-    # PREVISÃO
-    # ==========================================
-    st.header("🤖 Previsão de Performance Futura")
+with col2: 
 
-    st.write(f"""
-    Com base nos seus hábitos atuais, estima-se aproximadamente:
+# Slider para tempo espiritual diário em minutos 
+tempo_com_Deus = st.slider("🙏 Tempo com Deus (minutos)", 0, 120, 15) 
+ 
+# Slider para tempo em redes sociais 
+tela = st.slider("📱 Redes Sociais (horas)", 0, 10, 3) 
+ 
+# Slider para marcar prática de exercícios físicos 
+exercicio = st.slider("🏋️ Prática de exercícios físicos (dias)”, 0, 7, 5)  
+ 
 
-    **{chance}% de probabilidade** de você manter consistência e atingir seu objetivo de **{objetivo.lower()}**.
-    """)
+========================================== 
 
-    st.caption("⚠️ Esta previsão é heurística e pode futuramente ser substituída por Machine Learning real.")
+INPUTS EXTRAS 
 
-    st.markdown("---")
+Informações complementares sobre hábitos e objetivos 
 
-    # ==========================================
-    # PLANO DE MELHORIA
-    # ==========================================
-    st.header("🧭 Plano de Melhoria Personalizado")
+========================================== 
 
-    if sono < 7:
-        st.write("→ Priorize dormir pelo menos 7 horas por noite.")
+st.header("🎯 Hábitos e Objetivos") 
 
-    if tela > 4:
-        st.write("→ Reduza o tempo em redes sociais para no máximo 2 horas.")
+Menu dropdown para selecionar objetivo principal 
 
-    if tempo_com_Deus < 20:
-        st.write("→ Amplie gradualmente seu tempo espiritual diário.")
+objetivo = st.selectbox( "Qual seu principal objetivo atual?", [ "Alta produtividade", "Equilíbrio emocional", "Crescimento espiritual", "Performance acadêmica", "Disciplina pessoal" ] ) 
 
-    if not exercicio:
-        st.write("→ Inclua exercícios físicos 3–5x por semana.")
+Checkbox para leitura diária 
 
-    if not leitura:
-        st.write("→ Comece com 10 páginas de leitura por dia.")
+leitura = st.checkbox("📚 Faço leitura diária") 
 
-    if not planejamento:
-        st.write("→ Reserve 5 minutos à noite para planejar o dia seguinte.")
+Checkbox para planejamento diário 
 
-    st.markdown("---")
+planejamento = st.checkbox("📝 Planejo meu dia com antecedência") 
 
-    # ==========================================
-    # FRASE FINAL
-    # ==========================================
-    st.subheader("💭 Reflexão Final")
+st.markdown("---") 
 
-    st.write("""
-    **Sua rotina atual está construindo a vida que você diz querer?**
+========================================== 
 
-    Pequenas escolhas diárias criam grandes resultados ao longo do tempo.
-    """)
+BOTÃO DE ANÁLISE 
+
+Toda a lógica abaixo só roda quando o botão é clicado 
+
+========================================== 
+
+if st.button("🔍 Analisar Minha Rotina"): 
+
+# Variável de pontuação para avaliar a rotina 
+score = 0 
+ 
+st.header("Diagnóstico da Rotina") 
+ 
+ 
+# ========================================== 
+# ANÁLISE DO SONO 
+# Se usuário dorme 7h ou mais, ganha pontos 
+# ========================================== 
+if sono >= 7: 
+
+   st.success("✔️ Você está dormindo adequadamente.") 
+   score += 2 
+else: 
+   st.warning("⚠️ Sono insuficiente pode prejudicar foco e saúde.") 
+ 
+ 
+# ========================================== 
+# ANÁLISE DE REDES SOCIAIS 
+# Quanto menor o tempo, melhor a pontuação 
+# ========================================== 
+if tela <= 2: 
+   st.success("✔️ Uso saudável de redes sociais.") 
+   score += 2 
+elif tela <= 4: 
+   st.info("ℹ️ Uso moderado de redes sociais.") 
+   score += 1 
+else: 
+   st.error("🚨 Tempo excessivo em redes sociais.") 
+ 
+ 
+# ========================================== 
+# ANÁLISE ESPIRITUAL 
+# Avalia prioridade dada ao tempo com Deus 
+# ========================================== 
+if tempo_com_Deus >= 20: 
+   st.success("🙏 Excelente prioridade espiritual.") 
+   score += 2 
+elif tempo_com_Deus > 0: 
+   st.info("✨ Bom começo — tente aprofundar esse hábito.") 
+   score += 1 
+else: 
+   st.warning("⚠️ Nenhum tempo espiritual registrado.") 
+ 
+ 
+# ========================================== 
+# EXERCÍCIO FÍSICO 
+# Adiciona ponto se pratica exercício 
+# ========================================== 
+if exercicio: 
+   if exercicio>= 5: 
+   st.success("✔️ Você está cuidando da sua saúde!") 
+   score += 2 
+else: 
+   st.warning("⚠️Está na hora de se atentar para sua saúde.") 
+ 
+ 
+# Leitura diária adiciona ponto 
+if leitura: 
+   st.success("📚 Leitura diária fortalece aprendizado contínuo.") 
+   score += 1 
+ 
+ 
+# Planejamento diário adiciona ponto 
+if planejamento: 
+   st.success("📝 Planejamento diário aumenta consistência.") 
+   score += 1 
+ 
+ 
+# ========================================== 
+# VALIDAÇÃO DE TOTAL DE HORAS 
+# Verifica se rotina ultrapassa 24h 
+# ========================================== 
+total_horas = sono + trabalho + lazer + tela 
+ 
+if total_horas > 24: 
+   st.error("🚨 Sua rotina ultrapassa 24h. Ajuste necessário.") 
+else: 
+   score += 1 
+ 
+st.markdown("---") 
+ 
+ 
+# ========================================== 
+# RESULTADO FINAL 
+# Define perfil do usuário com base no score 
+# ========================================== 
+st.header("🎯 Resultado Final") 
+ 
+if score >= 10: 
+   perfil = "Alta Performance" 
+   chance = 95 
+   st.success("🔥 Sua rotina está extremamente alinhada com alta performance.") 
+ 
+elif score >= 5: 
+   perfil = "Em Evolução" 
+   chance = 75 
+   st.info("⚖️ Sua rotina é boa, mas ainda possui oportunidades de melhoria.") 
+ 
+else: 
+   perfil = "Desorganizada" 
+   chance = 40 
+   st.error("🚨 Sua rotina atual está desalinhada dos seus objetivos.") 
+ 
+ 
+# Exibe métricas principais 
+col1, col2, col3 = st.columns(3) 
+ 
+col1.metric("Score Final", score) 
+col2.metric("Perfil", perfil) 
+col3.metric("Chance de Sucesso", f"{chance}%") 
+ 
+st.markdown("---") 
+ 
+ 
+# ========================================== 
+# VISUALIZAÇÃO DOS DADOS 
+# Cria DataFrame para gerar gráfico 
+# ========================================== 
+st.header("📈 Visualização da Rotina") 
+ 
+dados = pd.DataFrame({ 
+   "Horas": { 
+       "Sono": sono, 
+       "Trabalho/Estudo": trabalho, 
+       "Lazer": lazer, 
+       "Redes Sociais": tela 
+   } 
+}) 
+ 
+ 
+# Gráfico de barras nativo do Streamlit 
+st.bar_chart(dados) 
+ 
+st.markdown("---") 
+ 
+ 
+# ========================================== 
+# PREVISÃO DE PERFORMANCE FUTURA 
+# Usa chance calculada heurísticamente 
+# ========================================== 
+st.header("🤖 Previsão de Performance Futura") 
+ 
+st.write(f""" 
+Com base nos seus hábitos atuais, estima-se aproximadamente: 
+ 
+**{chance}% de probabilidade** de você manter consistência e atingir seu objetivo de **{objetivo.lower()}**. 
+""") 
+ 
+ 
+st.markdown("---") 
+ 
+ 
+# ========================================== 
+# PLANO DE MELHORIA PERSONALIZADO 
+# Sugere ajustes com base nas respostas 
+# ========================================== 
+st.header("Plano de Melhoria Personalizado") 
+ 
+if sono < 7: 
+   st.write("→ Priorize dormir pelo menos 7 horas por noite.") 
+ 
+if tela > 4: 
+   st.write("→ Reduza o tempo em redes sociais para no máximo 2 horas.") 
+ 
+if tempo_com_Deus < 20: 
+   st.write("→ Amplie gradualmente seu tempo espiritual diário.") 
+ 
+if exercicio < 5: 
+   st.write("→ Inclua exercícios físicos 3–5x por semana.") 
+ 
+if not leitura: 
+   st.write("→ Comece com 10 páginas de leitura por dia.") 
+ 
+if not planejamento: 
+   st.write("→ Reserve 5 minutos à noite para planejar o dia seguinte.") 
+ 
+st.markdown("---") 
+ 
+ 
+# ========================================== 
+# MENSAGEM FINAL REFLEXIVA 
+# ========================================== 
+st.subheader("Agora pense sobre a sua rotina e no seu objetivo com ela") 
+ 
+st.write(""" 
+**Sua rotina atual está construindo a vida que você diz querer?** 
+ 
+Pequenas escolhas diárias criam grandes resultados ao longo do tempo. Aqui está uma rotina personalizada para você com base no seu objetivo:  
+""") 
+ 
