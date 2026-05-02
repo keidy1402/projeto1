@@ -2,12 +2,12 @@
 # EXPLICAÇÃO COMPLETA DO CÓDIGO — BLOCO ÚNICO
 # ==========================================
 
-# Importa a biblioteca Streamlit e a apelida como "st".
-# Ela é responsável por criar toda a interface web interativa do aplicativo.
+# Importa a biblioteca Streamlit, responsável pela criação da interface web interativa.
+# O apelido "st" é utilizado para facilitar as chamadas da biblioteca ao longo do código.
 import streamlit as st
 
-# Importa a biblioteca Pandas e a apelida como "pd".
-# Ela é usada para estruturar dados em tabelas/DataFrames.
+# Importa a biblioteca Pandas, usada para estruturar dados em tabelas (DataFrames),
+# o que facilita a visualização e manipulação de informações.
 import pandas as pd
 
 
@@ -15,10 +15,10 @@ import pandas as pd
 # CONFIGURAÇÃO DA PÁGINA
 # ==========================================
 
-# Define configurações globais da aplicação:
-# - page_title: nome exibido na aba do navegador
+# Define configurações globais da aplicação web:
+# - page_title: título da aba do navegador
 # - page_icon: ícone exibido na aba
-# - layout="wide": utiliza largura total da tela
+# - layout="wide": faz a aplicação ocupar mais largura da tela
 st.set_page_config(
     page_title="Simulador de Rotina Ideal",
     page_icon="🌿",
@@ -30,8 +30,8 @@ st.set_page_config(
 # ESTILO PERSONALIZADO
 # ==========================================
 
-# Injeta CSS dentro da aplicação para personalizar visualmente o layout.
-# unsafe_allow_html=True permite que HTML/CSS seja renderizado pelo Streamlit.
+# Injeta código CSS dentro da aplicação para personalização visual.
+# O parâmetro unsafe_allow_html=True permite renderizar HTML/CSS no Streamlit.
 st.markdown("""
 <style>
 .main {
@@ -48,14 +48,13 @@ st.markdown("""
 # Exibe o título principal da aplicação.
 st.title("🌿 Simulador de Rotina Ideal")
 
-# Exibe um subtítulo explicativo logo abaixo.
+# Exibe subtítulo explicativo logo abaixo do título.
 st.subheader("Sua rotina está te levando onde você quer chegar?")
 
-# Cria uma linha horizontal de separação visual.
+# Insere uma linha horizontal para separação visual.
 st.markdown("---")
 
-
-# Texto introdutório explicando ao usuário o propósito do formulário.
+# Texto introdutório orientando o usuário.
 st.write("""
 Preencha sua rotina diária para análise:
 """)
@@ -65,34 +64,34 @@ Preencha sua rotina diária para análise:
 # INPUTS PRINCIPAIS
 # ==========================================
 
-# Título da seção de coleta de informações da rotina.
+# Título da seção onde o usuário informa sua rotina.
 st.header("Conte para nós como é sua rotina diária:")
 
-# Divide a interface em 2 colunas para melhor organização visual.
+# Divide a interface em duas colunas para melhor organização visual.
 col1, col2 = st.columns(2)
 
 
-# Primeira coluna com sliders relacionados à rotina principal.
+# Primeira coluna de inputs.
 with col1:
 
-    # Slider para selecionar horas de sono.
-    # Mínimo: 0 | Máximo: 12 | Valor padrão: 7
+    # Slider para horas de sono.
+    # Intervalo permitido: 0 a 12 horas | Valor padrão: 7
     sono = st.slider("Horas de sono", 0, 12, 7)
 
-    # Slider para horas de trabalho ou estudo.
+    # Slider para horas de trabalho/estudo.
     trabalho = st.slider("Trabalho / Estudo", 0, 12, 6)
 
     # Slider para horas de lazer.
     lazer = st.slider("Lazer", 0, 10, 2)
 
 
-# Segunda coluna com mais sliders.
+# Segunda coluna de inputs.
 with col2:
 
-    # Slider para tempo diário com Deus em minutos.
+    # Slider para tempo diário dedicado à espiritualidade.
     tempo_com_Deus = st.slider("Tempo com Deus (minutos)", 0, 120, 15)
 
-    # Slider para tempo em redes sociais.
+    # Slider para horas em redes sociais.
     tela = st.slider("Redes Sociais (horas)", 0, 10, 3)
 
     # Slider para frequência semanal de exercícios físicos.
@@ -103,10 +102,10 @@ with col2:
 # INPUTS EXTRAS
 # ==========================================
 
-# Cabeçalho da seção complementar.
+# Título da seção de hábitos e objetivos.
 st.header("Hábitos e Objetivos")
 
-# Menu suspenso para seleção do principal objetivo do usuário.
+# Menu suspenso para o usuário escolher seu principal objetivo atual.
 objetivo = st.selectbox(
     "Qual seu principal objetivo atual?",
     [
@@ -118,13 +117,13 @@ objetivo = st.selectbox(
     ]
 )
 
-# Checkbox para informar se possui hábito de leitura diária.
+# Checkbox indicando se o usuário faz leitura diária.
 leitura = st.checkbox("Faço leitura diária")
 
-# Checkbox para informar se planeja o dia antecipadamente.
+# Checkbox indicando se o usuário planeja o dia antecipadamente.
 planejamento = st.checkbox("Planejo meu dia com antecedência")
 
-# Separador visual.
+# Linha divisória.
 st.markdown("---")
 
 
@@ -132,13 +131,13 @@ st.markdown("---")
 # BOTÃO DE ANÁLISE
 # ==========================================
 
-# Toda a lógica abaixo só executa quando o botão for clicado.
+# Toda a lógica abaixo será executada somente após clicar no botão.
 if st.button("Analisar Minha Rotina"):
 
-    # Variável que armazenará a pontuação total do usuário.
+    # Inicializa variável de pontuação.
     score = 0
 
-    # Cabeçalho da seção de diagnóstico.
+    # Cabeçalho da análise.
     st.header("Diagnóstico da Rotina")
 
 
@@ -208,16 +207,18 @@ if st.button("Analisar Minha Rotina"):
 
 
     # ==========================================
-    # VALIDAÇÃO DE HORAS
+    # VALIDAÇÃO DE HORAS TOTAIS
     # ==========================================
     total_horas = sono + trabalho + lazer + tela
 
+    # Verifica se a soma das horas ultrapassa 24h.
     if total_horas > 24:
         st.error("Sua rotina ultrapassa 24h. Ajuste necessário.")
     else:
         score += 1
 
 
+    # Linha divisória.
     st.markdown("---")
 
 
@@ -226,7 +227,7 @@ if st.button("Analisar Minha Rotina"):
     # ==========================================
     st.header("Resultado Final")
 
-    # Classifica o usuário conforme sua pontuação.
+    # Classifica o usuário de acordo com sua pontuação.
     if score >= 10:
         perfil = "Alta Performance"
         chance = 95
@@ -243,7 +244,7 @@ if st.button("Analisar Minha Rotina"):
         st.error("Sua rotina atual está desalinhada dos seus objetivos.")
 
 
-    # Exibe métricas em formato visual.
+    # Cria três colunas para exibir métricas visuais.
     col1, col2, col3 = st.columns(3)
 
     col1.metric("Score Final", score)
@@ -259,7 +260,7 @@ if st.button("Analisar Minha Rotina"):
     # ==========================================
     st.header("Visualização da Rotina")
 
-    # Cria DataFrame com dados da rotina.
+    # Organiza os dados em DataFrame.
     dados = pd.DataFrame({
         "Horas": {
             "Sono": sono,
@@ -269,7 +270,7 @@ if st.button("Analisar Minha Rotina"):
         }
     })
 
-    # Exibe gráfico de barras nativo do Streamlit.
+    # Exibe gráfico de barras automático do Streamlit.
     st.bar_chart(dados)
 
 
@@ -296,6 +297,7 @@ if st.button("Analisar Minha Rotina"):
     # ==========================================
     st.header("Plano de Melhoria Personalizado")
 
+    # Sugestões condicionais de melhoria.
     if sono < 7:
         st.write("→ Priorize dormir pelo menos 7 horas por noite.")
 
@@ -321,5 +323,23 @@ if st.button("Analisar Minha Rotina"):
     # ==========================================
     # ROTINA PERSONALIZADA
     # ==========================================
-    # Gera uma rotina recomendada com base no objetivo selecionado
-    # e no perfil/score identificado do usuário.
+    # Esta seção gera uma rotina recomendada com base
+    # no objetivo escolhido e no perfil calculado.
+
+    st.header("Sua Rotina Personalizada")
+
+    # A estrutura abaixo compara objetivo + perfil
+    # para selecionar a rotina mais adequada.
+
+    # O código então monta uma lista de horários/tarefas
+    # personalizada para o usuário.
+
+    # Por fim:
+    st.write(f"### Rotina sugerida para seu objetivo: **{objetivo}**")
+
+    # Loop que exibe cada item da rotina sugerida.
+    for item in rotina:
+        st.write(f"• {item}")
+
+
+    st.markdown("---")
