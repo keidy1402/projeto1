@@ -241,81 +241,153 @@ if st.button("🔍 Analisar Minha Rotina"):
 
 
     # ==========================================
-    # ROTINA PERSONALIZADA ADAPTATIVA
+    # ROTINA PERSONALIZADA
     # ==========================================
-    st.header("📅 Rotina Personalizada para Seu Momento Atual")
+    st.header("📅 Sua Rotina Personalizada")
 
-    # Base pelo objetivo
     if objetivo == "Alta produtividade":
-        rotina_base = [
-            "Blocos de trabalho profundo pela manhã",
-            "Planejamento diário estruturado",
-            "Sessões de revisão no fim do dia"
-        ]
+
+        if perfil == "Alta Performance":
+            rotina = [
+                "06:00 — Acordar",
+                "06:15 — Exercício físico",
+                "07:00 — Planejamento estratégico",
+                "08:00–12:00 — Trabalho profundo / estudo",
+                "14:00–18:00 — Execução de tarefas prioritárias",
+                "21:00 — Revisão e planejamento do próximo dia"
+            ]
+
+        elif perfil == "Em Evolução":
+            rotina = [
+                "07:00 — Acordar",
+                "07:30 — Organizar prioridades do dia",
+                "08:00–11:00 — Bloco principal de foco",
+                "14:00–17:00 — Tarefas secundárias",
+                "20:30 — Revisão simples do dia"
+            ]
+
+        else:
+            rotina = [
+                "08:00 — Acordar em horário fixo",
+                "08:30 — Escolher 3 prioridades do dia",
+                "10:00 — Primeiro bloco de foco curto",
+                "15:00 — Segundo bloco de foco",
+                "20:00 — Preparação do dia seguinte"
+            ]
 
     elif objetivo == "Equilíbrio emocional":
-        rotina_base = [
-            "Momentos de pausa entre atividades",
-            "Desconexão digital noturna",
-            "Tempo reservado para autocuidado"
-        ]
+
+        if perfil == "Alta Performance":
+            rotina = [
+                "06:30 — Acordar com calma",
+                "07:00 — Exercício / alongamento",
+                "08:00 — Trabalho / estudo",
+                "12:00 — Pausa real para almoço",
+                "18:00 — Atividade relaxante",
+                "21:00 — Desconexão digital"
+            ]
+
+        elif perfil == "Em Evolução":
+            rotina = [
+                "07:00 — Acordar sem pressa",
+                "07:30 — Momento de autocuidado",
+                "09:00 — Trabalho / estudo",
+                "17:00 — Caminhada / lazer leve",
+                "21:00 — Ritual de descanso"
+            ]
+
+        else:
+            rotina = [
+                "08:00 — Acordar em horário consistente",
+                "08:30 — Alongamento / respiração",
+                "10:00 — Atividade principal do dia",
+                "18:00 — Tempo para descanso",
+                "21:00 — Desligar telas"
+            ]
 
     elif objetivo == "Crescimento espiritual":
-        rotina_base = [
-            "Devocional pela manhã",
-            "Leitura espiritual diária",
-            "Reflexão/oração ao fim do dia"
-        ]
+
+        if perfil == "Alta Performance":
+            rotina = [
+                "05:30 — Devocional / oração",
+                "06:15 — Leitura bíblica",
+                "07:00 — Exercício / preparo do dia",
+                "20:00 — Reflexão espiritual",
+                "21:30 — Oração noturna"
+            ]
+
+        elif perfil == "Em Evolução":
+            rotina = [
+                "06:30 — Devocional matinal",
+                "07:00 — Leitura bíblica",
+                "19:00 — Reflexão sobre o dia",
+                "21:00 — Oração noturna"
+            ]
+
+        else:
+            rotina = [
+                "07:30 — 10 min de oração",
+                "08:00 — Versículo/reflexão do dia",
+                "20:00 — Gratidão e oração"
+            ]
 
     elif objetivo == "Performance acadêmica":
-        rotina_base = [
-            "Blocos intensos de estudo",
-            "Sessões de exercícios e revisão",
-            "Revisão espaçada noturna"
-        ]
 
-    else:
-        rotina_base = [
-            "Horário fixo para acordar",
-            "Checklist diário de tarefas",
-            "Planejamento da noite anterior"
-        ]
+        if perfil == "Alta Performance":
+            rotina = [
+                "06:00 — Acordar",
+                "06:30 — Revisão rápida",
+                "08:00–12:00 — Estudo profundo",
+                "14:00–17:00 — Exercícios / prática",
+                "19:00 — Revisão espaçada"
+            ]
 
+        elif perfil == "Em Evolução":
+            rotina = [
+                "07:00 — Acordar",
+                "08:00–10:00 — Bloco de estudo principal",
+                "14:00–16:00 — Exercícios",
+                "19:00 — Revisão leve"
+            ]
 
-    # Adaptação pelo perfil
-    if perfil == "Alta Performance":
-        adaptacao = [
-            "06:00 — Acordar",
-            "06:15 — Exercício físico",
-            "07:00 — Execução estratégica de alta prioridade",
-            "21:00 — Revisão e planejamento avançado"
-        ]
+        else:
+            rotina = [
+                "08:00 — Acordar",
+                "09:00 — 1h de estudo focado",
+                "15:00 — Exercícios práticos",
+                "20:00 — Revisão rápida"
+            ]
 
-    elif perfil == "Em Evolução":
-        adaptacao = [
-            "07:00 — Acordar",
-            "07:30 — Organizar prioridades do dia",
-            "08:00 — Bloco principal de foco",
-            "20:30 — Revisão simples do dia"
-        ]
+    else:  # Disciplina pessoal
 
-    else:
-        adaptacao = [
-            "08:00 — Acordar em horário consistente",
-            "08:30 — Escolher 3 prioridades do dia",
-            "10:00 — Primeiro bloco de foco curto",
-            "20:00 — Preparação do dia seguinte"
-        ]
+        if perfil == "Alta Performance":
+            rotina = [
+                "05:30 — Acordar",
+                "06:00 — Exercício físico",
+                "07:00 — Organização do dia",
+                "08:00–18:00 — Execução disciplinada",
+                "21:00 — Planejamento do dia seguinte"
+            ]
 
+        elif perfil == "Em Evolução":
+            rotina = [
+                "06:30 — Acordar",
+                "07:00 — Checklist matinal",
+                "08:00–17:00 — Blocos de execução",
+                "20:30 — Revisão do dia"
+            ]
 
-    st.write(f"### Rotina sugerida para quem busca **{objetivo.lower()}** e está no perfil **{perfil}**:")
+        else:
+            rotina = [
+                "08:00 — Acordar em horário fixo",
+                "08:30 — Fazer a cama / rotina matinal",
+                "10:00 — Primeira tarefa importante",
+                "20:00 — Planejar amanhã"
+            ]
 
-    st.markdown("#### Estrutura Estratégica")
-    for item in adaptacao:
-        st.write(f"• {item}")
+    st.write(f"### Rotina sugerida para seu objetivo: **{objetivo}**")
 
-    st.markdown("#### Hábitos Prioritários Para Seu Objetivo")
-    for item in rotina_base:
+    for item in rotina:
         st.write(f"• {item}")
 
     st.markdown("---")
