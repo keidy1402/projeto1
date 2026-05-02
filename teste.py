@@ -36,31 +36,25 @@ st.markdown("---")
 
 st.write("""
 Preencha sua rotina diária para análise:
-
-📊 Diagnóstico completo  
-📈 Visualização da rotina  
-🤖 Previsão de performance futura  
-🧭 Plano de melhoria personalizado  
-📅 Rotina adaptativa baseada no seu perfil
 """)
 
 
 # ==========================================
 # INPUTS PRINCIPAIS
 # ==========================================
-st.header("⏰ Conte para nós como é sua rotina diária:")
+st.header("Conte para nós como é sua rotina diária:")
 
 col1, col2 = st.columns(2)
 
 with col1:
-    sono = st.slider("🛌 Horas de sono", 0, 12, 7)
-    trabalho = st.slider("📚 Trabalho / Estudo", 0, 12, 6)
-    lazer = st.slider("🎮 Lazer", 0, 10, 2)
+    sono = st.slider("Horas de sono", 0, 12, 7)
+    trabalho = st.slider("Trabalho / Estudo", 0, 12, 6)
+    lazer = st.slider("Lazer", 0, 10, 2)
 
 with col2:
-    tempo_com_Deus = st.slider("🙏 Tempo com Deus (minutos)", 0, 120, 15)
-    tela = st.slider("📱 Redes Sociais (horas)", 0, 10, 3)
-    exercicio = st.slider("🏋️ Prática de exercícios físicos (dias/semana)", 0, 7, 3)
+    tempo_com_Deus = st.slider("Tempo com Deus (minutos)", 0, 120, 15)
+    tela = st.slider("Redes Sociais (horas)", 0, 10, 3)
+    exercicio = st.slider("Prática de exercícios físicos (dias/semana)", 0, 7, 3)
 
 
 # ==========================================
@@ -92,7 +86,7 @@ if st.button("🔍 Analisar Minha Rotina"):
 
     score = 0
 
-    st.header("📊 Diagnóstico da Rotina")
+    st.header("Diagnóstico da Rotina")
 
     # SONO
     if sono >= 7:
@@ -133,19 +127,19 @@ if st.button("🔍 Analisar Minha Rotina"):
 
     # LEITURA
     if leitura:
-        st.success("📚 Leitura diária fortalece aprendizado contínuo.")
+        st.success("Leitura diária fortalece aprendizado contínuo.")
         score += 1
 
     # PLANEJAMENTO
     if planejamento:
-        st.success("📝 Planejamento diário aumenta consistência.")
+        st.success("Planejamento diário aumenta consistência.")
         score += 1
 
     # VALIDAÇÃO DE HORAS
     total_horas = sono + trabalho + lazer + tela
 
     if total_horas > 24:
-        st.error("🚨 Sua rotina ultrapassa 24h. Ajuste necessário.")
+        st.error("Sua rotina ultrapassa 24h. Ajuste necessário.")
     else:
         score += 1
 
@@ -155,22 +149,22 @@ if st.button("🔍 Analisar Minha Rotina"):
     # ==========================================
     # RESULTADO FINAL
     # ==========================================
-    st.header("🎯 Resultado Final")
+    st.header("Resultado Final")
 
     if score >= 10:
         perfil = "Alta Performance"
         chance = 95
-        st.success("🔥 Sua rotina está extremamente alinhada com alta performance.")
+        st.success("Sua rotina está extremamente alinhada com alta performance.")
 
     elif score >= 6:
         perfil = "Em Evolução"
         chance = 75
-        st.info("⚖️ Sua rotina é boa, mas ainda possui oportunidades de melhoria.")
+        st.info("Sua rotina é boa, mas ainda possui oportunidades de melhoria.")
 
     else:
         perfil = "Desorganizada"
         chance = 40
-        st.error("🚨 Sua rotina atual está desalinhada dos seus objetivos.")
+        st.error("Sua rotina atual está desalinhada dos seus objetivos.")
 
     col1, col2, col3 = st.columns(3)
 
@@ -184,7 +178,7 @@ if st.button("🔍 Analisar Minha Rotina"):
     # ==========================================
     # VISUALIZAÇÃO DA ROTINA
     # ==========================================
-    st.header("📈 Visualização da Rotina")
+    st.header("Visualização da Rotina")
 
     dados = pd.DataFrame({
         "Horas": {
@@ -203,7 +197,7 @@ if st.button("🔍 Analisar Minha Rotina"):
     # ==========================================
     # PREVISÃO DE PERFORMANCE FUTURA
     # ==========================================
-    st.header("🤖 Previsão de Performance Futura")
+    st.header("Previsão de Performance Futura")
 
     st.write(f"""
     Com base nos seus hábitos atuais, estima-se aproximadamente:
@@ -217,7 +211,7 @@ if st.button("🔍 Analisar Minha Rotina"):
     # ==========================================
     # PLANO DE MELHORIA
     # ==========================================
-    st.header("🧭 Plano de Melhoria Personalizado")
+    st.header("Plano de Melhoria Personalizado")
 
     if sono < 7:
         st.write("→ Priorize dormir pelo menos 7 horas por noite.")
@@ -243,7 +237,7 @@ if st.button("🔍 Analisar Minha Rotina"):
     # ==========================================
     # ROTINA PERSONALIZADA
     # ==========================================
-    st.header("📅 Sua Rotina Personalizada")
+    st.header("Sua Rotina Personalizada")
 
     if objetivo == "Alta produtividade":
 
@@ -391,15 +385,3 @@ if st.button("🔍 Analisar Minha Rotina"):
         st.write(f"• {item}")
 
     st.markdown("---")
-
-
-    # ==========================================
-    # REFLEXÃO FINAL
-    # ==========================================
-    st.subheader("💭 Agora pense sobre a sua rotina e no seu objetivo com ela")
-
-    st.write("""
-    **Sua rotina atual está construindo a vida que você diz querer?**
-
-    Pequenas escolhas diárias criam grandes resultados ao longo do tempo.
-    """)
